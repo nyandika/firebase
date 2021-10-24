@@ -1,5 +1,5 @@
 import React, { useContext, useRef } from 'react';
-import { Button, Col, Container, Form, Navbar } from "react-bootstrap";
+import { Button, Row, Col, Container, Form, Navbar } from "react-bootstrap";
 import { AuthContext } from "./context/AuthContext";
 import { auth } from "./firebaseSetup";
 
@@ -42,38 +42,37 @@ function App() {
           <Navbar.Brand>Firebase Authentication</Navbar.Brand>
           <button onClick={signOut} type="button" style={{backgroundColor: "white", color: "green", boxShadow: "none", border: "none", borderRadius: "10px"}}> Sign Out</button>
         </Navbar>
-        {!user ?(
-        <Container style={{maxWidth: "500px"}} fluid>
-          <Form className="mt-4">
-            <Form.Group controlId="formEmail">
-              <Form.Label>Email</Form.Label>
-              <Form.Control ref={emailRef} type="email" placeholder="email"/>
-            </Form.Group>
+        {!user ? (
+          <Container style={{maxWidth: "500px"}}>
+            <Form className="mt-4">
+              <Form.Group controlId="formEmail">
+                <Form.Label>Email</Form.Label>
+                <Form.Control ref={emailRef} type="email" placeholder="email" />
+              </Form.Group>
+              <Form.Group controlId="formPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control ref={passwordRef} type="password" placeholder="password" />
+              </Form.Group>
+              <Row className="mt-4">
+                <Col xs={6}>
+                  <Button onClick={createAccount} type="button">
+                    Sign Up
+                  </Button>
+                </Col>
 
-            <Form.Group controlId="formPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control ref={passwordRef} type="password" placeholder="password"/>
-            </Form.Group>
+                <Col xs={6}>
+                  <Button onClick={signIn} type="button" variant="secondary">
+                    Sign In
+                  </Button>
+                </Col>
+              </Row>
+            </Form>
 
-            <Form.Row>
-              <Col xs={6}>
-                <Button onClick={createAccount} type="button" block>
-                  Sign Up
-                </Button>
-              </Col>
-
-              <Col xs={6}>
-                <Button onClick={signIn} type="button" variant="secondary" block>
-                  Sign In
-                </Button>
-              </Col>
-            </Form.Row>
-        
-          </Form>
-        </Container>
-        ) : (
+          </Container>
+        ): (
           <h2 className="mt-4 text-center">Welcome {user.email}</h2>
-      )}
+        )
+      }
     </>
   );
 }
