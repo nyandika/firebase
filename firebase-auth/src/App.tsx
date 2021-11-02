@@ -17,7 +17,7 @@ function App() {
         passwordRef.current!.value
       );
     } catch(error){
-      console.error(error)
+      alert(error)
     }
   };
 
@@ -28,7 +28,7 @@ function App() {
         passwordRef.current!.value
       );
     } catch(error){
-      console.error(error)
+      alert(error)
     }
   };
 
@@ -39,7 +39,7 @@ function App() {
   return (
     <>
        <Navbar className="justify-content-between" bg="dark" variant="dark">
-          <Navbar.Brand>Firebase Authentication</Navbar.Brand>
+          <Navbar.Brand className="ml-20">Firebase Authentication</Navbar.Brand>
           <button onClick={signOut} type="button" style={{backgroundColor: "white", color: "green", boxShadow: "none", border: "none", borderRadius: "10px"}}> Sign Out</button>
         </Navbar>
         {!user ? (
@@ -47,11 +47,11 @@ function App() {
             <Form className="mt-4">
               <Form.Group controlId="formEmail">
                 <Form.Label>Email</Form.Label>
-                <Form.Control ref={emailRef} type="email" placeholder="email" />
+                <Form.Control ref={emailRef} type="email" id="email" placeholder="email" />
               </Form.Group>
               <Form.Group controlId="formPassword">
                 <Form.Label>Password</Form.Label>
-                <Form.Control ref={passwordRef} type="password" placeholder="password" />
+                <Form.Control ref={passwordRef} type="password" id="pass" placeholder="password" />
               </Form.Group>
               <Row className="mt-4">
                 <Col xs={6}>
