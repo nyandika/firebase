@@ -2,6 +2,9 @@ import React, { useContext, useRef } from 'react';
 import { Button, Row, Col, Container, Form, Navbar } from "react-bootstrap";
 import { AuthContext } from "./context/AuthContext";
 import { auth } from "./firebaseSetup";
+import Swal from 'sweetalert2';
+
+
 
 
 
@@ -10,15 +13,23 @@ function App() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
+
+
   const createAccount = async () => {
     try{
       await auth.createUserWithEmailAndPassword(
         emailRef.current!.value,
         passwordRef.current!.value
       );
-    } catch(error){
-      alert(error)
-    }
+    } catch (error) {
+        // console.error()
+        Swal.fire({
+          icon: 'error',
+          title: 'Sign Up Failed!',
+          text: '',
+       });
+    };
+   
   };
 
   const signIn = async () => {
@@ -27,8 +38,13 @@ function App() {
         emailRef.current!.value,
         passwordRef.current!.value
       );
-    } catch(error){
-      alert(error)
+    } catch(error) {
+      //  console.error()
+       Swal.fire({
+         icon: 'error',
+         title: 'Sign In Failed!',
+         text: '',
+      });
     }
   };
 
@@ -47,11 +63,11 @@ function App() {
             <Form className="mt-4">
               <Form.Group controlId="formEmail">
                 <Form.Label>Email</Form.Label>
-                <Form.Control ref={emailRef} type="email" id="email" placeholder="email" />
+                <Form.Control ref={emailRef} type="email" placeholder="email"  />
               </Form.Group>
-              <Form.Group controlId="formPassword">
+              <Form.Group controlId="formPassword" id="email">
                 <Form.Label>Password</Form.Label>
-                <Form.Control ref={passwordRef} type="password" id="pass" placeholder="password" />
+                <Form.Control ref={passwordRef} type="password" placeholder="password" />
               </Form.Group>
               <Row className="mt-4">
                 <Col xs={6}>
